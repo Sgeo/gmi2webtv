@@ -11,14 +11,14 @@
         It is currently downloaded as a binary file, to preserve Windows-1252 encoding.
         <textarea id="gemtext"></textarea>
         <button id="convert">Convert</button>
-        <a id="result" href="" download>Result</a>
+        <a id="result" download>Result</a>
         <script type="module">
             import { gmi2webtv } from './gmi2webtv.js';
             document.querySelector("#convert").addEventListener("click", function() {
                 let gemtextElem = document.querySelector("#gemtext");
                 let gemtext = gemtextElem.value;
                 let result = gmi2webtv(gemtext);
-                let blob = new Blob([result], {type: "text/html"});
+                let blob = new Blob([result], {type: "text/html;charset=windows-1252"});
                 let url = URL.createObjectURL(blob);
                 document.querySelector("#result").href = url;
             });
