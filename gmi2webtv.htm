@@ -6,19 +6,17 @@
     </head>
     <body>
         Expects there to exist an openmoji directory, with .gif versions of the emojis.
-        Emoji handling is currectly poor, as it may badly damage multi-codepoint emoji.
         Current handling of links may be unsafe.
-        It is currently downloaded as a binary file, to preserve Windows-1252 encoding.
         <textarea id="gemtext"></textarea>
         <button id="convert">Convert</button>
-        <a id="result" download>Result</a>
+        <a id="result">Result</a>
         <script type="module">
             import { gmi2webtv } from './gmi2webtv.js';
             document.querySelector("#convert").addEventListener("click", function() {
                 let gemtextElem = document.querySelector("#gemtext");
                 let gemtext = gemtextElem.value;
                 let result = gmi2webtv(gemtext);
-                let blob = new Blob([result], {type: "text/html;charset=windows-1252"});
+                let blob = new Blob([result], {type: "text/html;charset=utf-8"});
                 let url = URL.createObjectURL(blob);
                 document.querySelector("#result").href = url;
             });
